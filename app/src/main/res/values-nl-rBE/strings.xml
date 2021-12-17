@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Paketten volgen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="menu_home">Mijn Paketten</string>
+    <string name="menu_add">Voeg pakket toe</string>
+    <string name="nav_header_subtitle">Volg je bestellingen</string>
+    <string name="nav_header_title">Paketten volgen</string>
+</resources>
