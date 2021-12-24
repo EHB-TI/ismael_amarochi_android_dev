@@ -9,55 +9,51 @@
 
     <TextView
         android:id="@+id/text_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="395dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/parcel_number_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.42" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/parcel_number_input"
         android:layout_width="258dp"
         android:layout_height="44dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
-        android:hint="Enter tracking number"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/scan_button"
+        android:hint="@string/enter_tracking_number"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_gallery" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/scan_button"
         android:layout_width="120dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="356dp"
-        android:text="Scan"
+        android:layout_marginBottom="352dp"
+        android:text="@string/scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/submit_button" />
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@+id/submit_button" />
 
     <Button
         android:id="@+id/submit_button"
         android:layout_width="120dp"
         android:layout_height="46dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="356dp"
-        android:text="Submit"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="352dp"
+        android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

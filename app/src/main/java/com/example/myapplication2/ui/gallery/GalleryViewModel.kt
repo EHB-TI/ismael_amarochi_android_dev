@@ -10,4 +10,7 @@ class GalleryViewModel : ViewModel() {
         value = "Add an existing parcel to the list"
     }
     val text: LiveData<String> = _text
+
+
+
 }

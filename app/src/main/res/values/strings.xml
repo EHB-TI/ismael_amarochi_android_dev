@@ -10,5 +10,9 @@
     <string name="menu_home">My parcels </string>
     <string name="menu_add">Add parcel</string>
     <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="delete_all">Delete all</string>
+    <string name="submit">Submit</string>
+    <string name="scan">Scan</string>
+    <string name="enter_tracking_number">Enter tracking number</string>
 
 </resources>
