@@ -27,11 +27,11 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private static final String DATABASE_NAME = "Parcels.db";
+    private static final String DATABASE_NAME = "ParcelsTracking.db";
     private static final int DATABASE_VERSION = 1;
     private ArrayList<String> content;
 
-    private static final String TABLE_NAME = "my_parcels";
+    private static final String TABLE_NAME = "parcels";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_PARCELNUMBER = "parcel_number";
     private static final String COLUMN_PARCELNAME = "parcel_name";
