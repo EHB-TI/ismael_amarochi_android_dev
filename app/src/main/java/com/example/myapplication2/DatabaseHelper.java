@@ -6,14 +6,30 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "Parcels.db";
     private static final int DATABASE_VERSION = 1;
+    private ArrayList<String> content;
 
     private static final String TABLE_NAME = "my_parcels";
     private static final String COLUMN_ID = "_id";
@@ -41,19 +57,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addBook(String number, String name, String status){
+    void addBook(String parcelnumber){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_PARCELNUMBER, number);
-        cv.put(COLUMN_PARCELNAME, name);
-        cv.put(COLUMN_STATUS, status);
+        content = getContent(parcelnumber);
+
+        cv.put(COLUMN_PARCELNUMBER, content.get(1));
+        cv.put(COLUMN_PARCELNAME, content.get(2));
+        cv.put(COLUMN_STATUS, content.get(3));
+
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public ArrayList<String> getContent(String number){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="https://tracking.bring.com/api/v2/tracking.json";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("version", "2");
+        params.put("X-Bring-Client-URL", "https://www.erasmushogeschool.be/nl");
+        params.put("X-MyBring-API-Key", "4ac3d105-8aed-4494-a4e4-83bdbbcb574f");
+        params.put("X-MyBring-API-Uid", "amarochiismael@gmail.com");
+        params.put("lang", "en");
+        params.put("q", number);
+
+        JSONObject parameters = new JSONObject(params);
+
+        JsonObjectRequest jsonObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, parameters, new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        try {
+                            content.add(response.getJSONArray("consignmentSet").getJSONObject(0)
+                                    .getJSONArray("packageSet").getJSONObject(0)
+                                    .getString("packageNumber"));
+                            Log.d("-", "Number retrieved");
+
+                            content.add(response.getJSONArray("packageSet").getJSONObject(0)
+                                    .getJSONArray("packageSet").getJSONObject(0)
+                                    .getString("productName"));
+                            Log.d("--", "Name retrieved");
+
+                            content.add(response.getJSONArray("packageSet").getJSONObject(0)
+                                    .getJSONArray("packageSet").getJSONObject(0)
+                                    .getJSONArray("eventSet").getJSONObject(0)
+                                    .getString("status"));
+                            Log.d("---", "Status retrieved");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error)
+                            {
+                                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+// Add the request to the RequestQueue.
+        queue.add(jsonObjRequest);
+        return content;
     }
 
     Cursor readAllData(){

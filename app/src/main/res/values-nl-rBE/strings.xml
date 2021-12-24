@@ -6,4 +6,8 @@
     <string name="menu_add">Voeg pakket toe</string>
     <string name="nav_header_subtitle">Volg je bestellingen</string>
     <string name="nav_header_title">Paketten volgen</string>
+    <string name="delete_all">Alles verwijderen</string>
+    <string name="submit">Voeg toe</string>
+    <string name="scan">Scan</string>
+    <string name="enter_tracking_number">Vul tracking nummer in</string>
 </resources>
