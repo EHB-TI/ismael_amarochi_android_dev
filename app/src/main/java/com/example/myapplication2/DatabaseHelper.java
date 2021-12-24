@@ -57,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addBook(String parcelnumber){
+    public void addParcel(String parcelnumber){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
