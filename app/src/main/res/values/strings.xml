@@ -14,5 +14,10 @@
     <string name="submit">Submit</string>
     <string name="scan">Scan</string>
     <string name="enter_tracking_number">Enter tracking number</string>
+    <string name="parcel_tracking_number">Parcel tracking number</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="parcel_status">Parcel status</string>
+    <string name="parcel_name">Parcel name</string>
 
 </resources>

@@ -10,4 +10,9 @@
     <string name="submit">Voeg toe</string>
     <string name="scan">Scan</string>
     <string name="enter_tracking_number">Vul tracking nummer in</string>
+    <string name="parcel_tracking_number">Tracking nummer</string>
+    <string name="update">Update</string>
+    <string name="delete">Verwijder</string>
+    <string name="parcel_status">Status</string>
+    <string name="parcel_name">Naam</string>
 </resources>

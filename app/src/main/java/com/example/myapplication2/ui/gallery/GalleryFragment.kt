@@ -1,7 +1,5 @@
 package com.example.myapplication2.ui.gallery
 
-import CustomAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication2.DatabaseHelper
-import com.example.myapplication2.MainActivity
+import com.example.myapplication2.MyDatabaseHelper
 import com.example.myapplication2.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
@@ -29,7 +26,7 @@ class GalleryFragment : Fragment() {
   private lateinit var scan_button : Button
   private lateinit var input : EditText
 
-  private lateinit var myDB : DatabaseHelper
+  private lateinit var myDB : MyDatabaseHelper
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -52,19 +49,31 @@ class GalleryFragment : Fragment() {
     submit_button = view.findViewById(com.example.myapplication2.R.id.submit_button)
 
 
-    myDB = DatabaseHelper(context)
+    myDB = MyDatabaseHelper(context)
 
-    return root
+    submit_button.setOnClickListener{
+
+//      if (input.getText().toString().trim() == null) {
+//        Toast.makeText(context, "Please enter all the data..", Toast.LENGTH_SHORT).show();
+//        return@setOnClickListener;
+//      }
+
+
+      //TODO Add Toast when input is empty
+        println("Class: " + this.toString() + "Where: " + "After pressing submit button")
+//      myDB.addParcel(input.getText().toString().trim())
+      myDB.addParcel(input.text.toString())
+
+      //TODO check, db doesn't show up in inspector
+    }
+
+    return view
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    submit_button.setOnClickListener{
-      myDB.addParcel(input.text.toString().trim())
-      Log.d("", input.toString());
-      //TODO check, db doesn't show up in inspector
-    }
+
 
   }
 
