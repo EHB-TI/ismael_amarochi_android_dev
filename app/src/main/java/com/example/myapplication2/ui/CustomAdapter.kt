@@ -1,3 +1,4 @@
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -5,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import java.util.ArrayList
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +21,6 @@ class CustomAdapter(private val activity: Fragment, private val context: Context
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-
-
         val parcel_id_txt: TextView
         val parcel_name_txt: TextView
         val parcel_status_txt: TextView
@@ -34,33 +34,11 @@ class CustomAdapter(private val activity: Fragment, private val context: Context
             parcel_number_txt = itemView.findViewById(R.id.parcel_number_txt)
             mainLayout = itemView.findViewById(R.id.mainLayout)
         }
-
-//        internal fun bind(position: Int) {
-//
-//            parcel_id_txt.setText(parcel_id.get(position))
-//            parcel_name_txt.setText(parcel_name.get(position))
-//            parcel_status_txt.setText(parcel_status.get(position))
-//            parcel_number_txt.setText(parcel_number.get(position))
-//            mainLayout.setOnClickListener {
-//                val intent : Intent = Intent(context, UpdateActivity::class.java)
-//                intent.putExtra("id", parcel_id.get(position))
-//                intent.putExtra("name", parcel_name.get(position))
-//                intent.putExtra("status", parcel_status.get(position))
-//                intent.putExtra("number", parcel_number.get(position))
-//                activity.startActivityForResult(intent, 1)
-//            }
-//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.my_row, parent, false))
     }
-
-//    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        (holder as ViewHolder).bind(position)
-//    }
-
-
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.parcel_id_txt.text = parcel_id[position]
@@ -69,10 +47,10 @@ class CustomAdapter(private val activity: Fragment, private val context: Context
         viewHolder.parcel_number_txt.text = parcel_number[position]
         viewHolder.mainLayout.setOnClickListener {
             val intent : Intent = Intent(context, UpdateActivity::class.java)
-            intent.putExtra("id", parcel_id.get(position))
-            intent.putExtra("name", parcel_name.get(position))
-            intent.putExtra("status", parcel_status.get(position))
-            intent.putExtra("number", parcel_number.get(position))
+            intent.putExtra("id", parcel_id[position])
+            intent.putExtra("name", parcel_name[position])
+            intent.putExtra("status", parcel_status[position])
+            intent.putExtra("number", parcel_number[position])
             activity.startActivityForResult(intent, 1)
         }
     }

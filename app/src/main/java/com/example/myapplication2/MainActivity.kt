@@ -51,11 +51,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-
-
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -72,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("YES") { dialog, which ->
             myDB = MyDatabaseHelper(this)
             myDB.deleteAllData()
-            intent = Intent(this, GalleryFragment::class.java)
+            intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

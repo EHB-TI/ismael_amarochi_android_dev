@@ -1,6 +1,8 @@
 package com.example.myapplication2
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -25,9 +27,16 @@ class UpdateActivity  : AppCompatActivity() {
 
     lateinit var builder : AlertDialog.Builder
 
+    lateinit var actionBar: ActionBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTitle(R.string.update_view_title);
         setContentView(R.layout.activity_update)
+
+        actionBar = supportActionBar!!
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
 
         parcel_number_input = findViewById(R.id.parcel_number_input2)
         parcel_name = findViewById(R.id.name_input)
@@ -41,8 +50,10 @@ class UpdateActivity  : AppCompatActivity() {
             myDB = MyDatabaseHelper(this)
             name = parcel_name.text.toString().trim()
             status = parcel_status.text.toString().trim()
-            number = parcel_number_input.text.toString().trim()
+            number = intent.getStringExtra("number").toString()
             myDB.updateData(id, name, status, number)
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         delete_button.setOnClickListener{
@@ -55,9 +66,9 @@ class UpdateActivity  : AppCompatActivity() {
             intent.hasExtra("status") && intent.hasExtra("number")){
 
             id = intent.getStringExtra("id").toString()
-            name = intent.getStringExtra("title").toString()
-            status = intent.getStringExtra("author").toString()
-            number = intent.getStringExtra("pages").toString()
+            name = intent.getStringExtra("name").toString()
+            status = intent.getStringExtra("status").toString()
+            number = intent.getStringExtra("number").toString()
 
             parcel_name.setText(name)
             parcel_status.setText(status)
@@ -77,6 +88,8 @@ class UpdateActivity  : AppCompatActivity() {
         builder.setPositiveButton("YES") { dialog, which ->
             myDB = MyDatabaseHelper(this)
             myDB.deleteOneRow(id)
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             finish()
         }
         builder.setNegativeButton("NO") {dialog, which ->
@@ -85,4 +98,13 @@ class UpdateActivity  : AppCompatActivity() {
         builder.create().show()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

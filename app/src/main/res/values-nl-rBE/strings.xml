@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Paketten volgen</string>
     <string name="action_settings">Instellingen</string>
-    <string name="menu_home">Mijn Paketten</string>
+    <string name="menu_home">Mijn paketten</string>
     <string name="menu_add">Voeg pakket toe</string>
     <string name="nav_header_subtitle">Volg je bestellingen</string>
     <string name="nav_header_title">Paketten volgen</string>
@@ -15,4 +15,5 @@
     <string name="delete">Verwijder</string>
     <string name="parcel_status">Status</string>
     <string name="parcel_name">Naam</string>
+    <string name="update_view_title">Wijzig pakket</string>
 </resources>

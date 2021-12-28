@@ -13,7 +13,7 @@
         android:layout_marginTop="12dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="12dp">
 
@@ -30,14 +30,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:id="@+id/parcel_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:text="Title 1"
                 android:textColor="#000"
                 android:textSize="20sp"

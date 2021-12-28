@@ -19,5 +19,6 @@
     <string name="delete">Delete</string>
     <string name="parcel_status">Parcel status</string>
     <string name="parcel_name">Parcel name</string>
+    <string name="update_view_title">Update parcel</string>
 
 </resources>
