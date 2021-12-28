@@ -21,5 +21,16 @@
     <string name="parcel_name">Parcel name</string>
     <string name="update_view_title">Update parcel</string>
     <string name="barcode_scan_text">Scan barcode</string>
+    <string name="persmission_denied">Permission denied</string>
+    <string name="input_can_not_be_empty">Input field can not be empty</string>
+    <string name="only_items_are_ok">Only following numbers are allowed in order to function properly: TESTPACKAGEATPICKUPPOINT, TESTPACKAGEEDI, TESTPACKAGELOADEDFORDELIVERY, TESTPACKAGEDELIVERED</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="scanned">"Scanned : "</string>
+    <string name="delete_all_title">Delete all?</string>
+    <string name="sure_delete_all">Are you sure you want to delete all data?</string>
+    <string name="no_delete_all">NO</string>
+    <string name="yes_delete_all">YES</string>
+    <string name="sure_delete_item">"Are you sure you want to delete the following item: "</string>
+    <string name="no_data">No data</string>
 
 </resources>

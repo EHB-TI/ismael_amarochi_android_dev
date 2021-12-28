@@ -63,16 +63,16 @@ class MainActivity : AppCompatActivity() {
 
     fun confirmDialog(){
         builder = AlertDialog.Builder(this)
-        builder.setTitle("Delete all?")
-        builder.setMessage("Are you sure you want to delete all data?")
-        builder.setPositiveButton("YES") { dialog, which ->
+        builder.setTitle(getString(R.string.delete_all_title))
+        builder.setMessage(getString(R.string.sure_delete_all))
+        builder.setPositiveButton(getString(R.string.yes_delete_all)) { dialog, which ->
             myDB = MyDatabaseHelper(this)
             myDB.deleteAllData()
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-        builder.setNegativeButton("NO") {dialog, which ->
+        builder.setNegativeButton(getString(R.string.no_delete_all)) { dialog, which ->
 
         }
         builder.create().show()

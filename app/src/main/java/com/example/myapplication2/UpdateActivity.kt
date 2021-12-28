@@ -77,22 +77,22 @@ class UpdateActivity  : AppCompatActivity() {
         }
         else
         {
-            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.no_data), Toast.LENGTH_SHORT).show()
         }
     }
 
     fun confirmDialog(){
         builder = AlertDialog.Builder(this)
         builder.setTitle("Delete " + name + " ?")
-        builder.setMessage("Are you sure you want to delete the following item: " + name + " ?")
-        builder.setPositiveButton("YES") { dialog, which ->
+        builder.setMessage(getString(R.string.sure_delete_item) + name + " ?")
+        builder.setPositiveButton(getString(R.string.yes_delete_all)) { dialog, which ->
             myDB = MyDatabaseHelper(this)
             myDB.deleteOneRow(id)
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-        builder.setNegativeButton("NO") {dialog, which ->
+        builder.setNegativeButton(getString(R.string.no_delete_all)) {dialog, which ->
 
         }
         builder.create().show()

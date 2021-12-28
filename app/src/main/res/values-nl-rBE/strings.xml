@@ -16,4 +16,16 @@
     <string name="parcel_status">Status</string>
     <string name="parcel_name">Naam</string>
     <string name="update_view_title">Wijzig pakket</string>
+    <string name="barcode_scan_text">Scan de barcode</string>
+    <string name="persmission_denied">Permissie gewijgerd</string>
+    <string name="input_can_not_be_empty">Inputveld kan niet leeg zijn</string>
+    <string name="only_items_are_ok">Alleen de volgende nummers zijn toegestaan: TESTPACKAGEATPICKUPPOINT, TESTPACKAGEEDI, TESTPACKAGELOADEDFORDELIVERY, TESTPACKAGEDELIVERED</string>
+    <string name="cancelled">Gecancelled</string>
+    <string name="scanned">Resultaat :</string>
+    <string name="delete_all_title">Alles verwijderen?</string>
+    <string name="sure_delete_all">Bent u zeker dat u alles wilt verwijderen?</string>
+    <string name="no_delete_all">JA</string>
+    <string name="yes_delete_all">NEE</string>
+    <string name="sure_delete_item">Bent u zeker dat u volgend item wilt verwijderen:</string>
+    <string name="no_data">Geen data</string>
 </resources>

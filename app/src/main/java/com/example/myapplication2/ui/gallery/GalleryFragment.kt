@@ -68,7 +68,7 @@ class GalleryFragment : Fragment() {
                 scanBarcode()
             }
             else {
-                Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.persmission_denied), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -77,7 +77,7 @@ class GalleryFragment : Fragment() {
         submit_button.setOnClickListener {
 
             if (input.text.toString() == "") {
-                Toast.makeText(context, "Input field can not be empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.input_can_not_be_empty), Toast.LENGTH_SHORT).show();
                 return@setOnClickListener
             } else {
                 if (input.text.toString() == "TESTPACKAGEATPICKUPPOINT" || input.text.toString() == "TESTPACKAGELOADEDFORDELIVERY" ||
@@ -87,8 +87,7 @@ class GalleryFragment : Fragment() {
                     intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(context, "Only following numbers are allowed in order to function propperly: " +
-                            "TESTPACKAGEATPICKUPPOINT, TESTPACKAGEEDI, TESTPACKAGELOADEDFORDELIVERY, TESTPACKAGEDELIVERED",
+                    Toast.makeText(context, getString(R.string.only_items_are_ok),
                         Toast.LENGTH_LONG).show();
                 }
             }
@@ -118,9 +117,9 @@ class GalleryFragment : Fragment() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.cancelled), Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(context, "Scanned : " + result.contents, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.scanned) + result.contents, Toast.LENGTH_LONG).show()
                 scanContent = result.contents
                 myDB.addParcel(scanContent)
                 intent = Intent(activity, MainActivity::class.java)

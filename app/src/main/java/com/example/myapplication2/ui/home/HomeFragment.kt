@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var parcel_status : ArrayList<String>
     private lateinit var parcel_number : ArrayList<String>
     private lateinit var customAdapter : CustomAdapter
+    private lateinit var no_data : TextView
 
     private lateinit var builder : AlertDialog.Builder
 
@@ -53,6 +55,7 @@ class HomeFragment : Fragment() {
 
         val view: View = inflater.inflate(com.example.myapplication2.R.layout.fragment_home, container, false)
         recyclerView = view.findViewById(com.example.myapplication2.R.id.recyclerView)
+        no_data = view.findViewById(com.example.myapplication2.R.id.no_data)
 
         myDB = MyDatabaseHelper(context);
 
@@ -77,7 +80,7 @@ class HomeFragment : Fragment() {
     fun storeDataInArrays(){
         val cursor : Cursor = myDB.readAllData()
         if (cursor == null){
-            //TODO add empty image and text
+            no_data.setVisibility(View.VISIBLE);
         }
         else {
             while(cursor.moveToNext()){
@@ -86,6 +89,7 @@ class HomeFragment : Fragment() {
                 parcel_status.add(cursor.getString(2))
                 parcel_number.add(cursor.getString(3))
             }
+            no_data.setVisibility(View.INVISIBLE);
         }
     }
 
