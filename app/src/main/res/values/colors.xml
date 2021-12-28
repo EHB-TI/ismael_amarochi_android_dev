@@ -7,7 +7,10 @@
     <color name="teal_700">#787A91</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="zxing_possible_result_points">#0F044C</color>
 </resources>
+
+
 
 <!--    0F044C-->
 <!--    141E61-->

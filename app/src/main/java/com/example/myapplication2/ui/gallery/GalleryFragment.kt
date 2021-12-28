@@ -1,5 +1,6 @@
 package com.example.myapplication2.ui.gallery
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication2.MainActivity
 import com.example.myapplication2.MyDatabaseHelper
+import com.example.myapplication2.R
 import com.example.myapplication2.databinding.FragmentGalleryBinding
+import com.google.zxing.integration.android.IntentIntegrator
+
 
 class GalleryFragment : Fragment() {
 
@@ -26,6 +31,8 @@ class GalleryFragment : Fragment() {
     private lateinit var submit_button: Button
     private lateinit var scan_button: Button
     private lateinit var input: EditText
+
+    private lateinit var scanContent : String
 
     private lateinit var myDB: MyDatabaseHelper
 
@@ -54,6 +61,16 @@ class GalleryFragment : Fragment() {
         submit_button = view.findViewById(com.example.myapplication2.R.id.submit_button)
         scan_button = view.findViewById(com.example.myapplication2.R.id.scan_button)
 
+        val permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                scanBarcode()
+            }
+            else {
+                Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         myDB = MyDatabaseHelper(context)
 
@@ -74,20 +91,43 @@ class GalleryFragment : Fragment() {
                             "TESTPACKAGEATPICKUPPOINT, TESTPACKAGEEDI, TESTPACKAGELOADEDFORDELIVERY, TESTPACKAGEDELIVERED",
                         Toast.LENGTH_LONG).show();
                 }
-
             }
         }
 
-        scan_button.setOnClickListener {Toast.makeText(context, "TODO", Toast.LENGTH_SHORT).show();}
+        scan_button.setOnClickListener {
+            permissionLauncher.launch(Manifest.permission.CAMERA)
+        }
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    fun scanBarcode(){
+        val integrator = IntentIntegrator.forSupportFragment(this)
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
+        integrator.setOrientationLocked(true)
+        integrator.setPrompt(getString(R.string.barcode_scan_text))
+        integrator.setBeepEnabled(false)
+        integrator.initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context, "Scanned : " + result.contents, Toast.LENGTH_LONG).show()
+                scanContent = result.contents
+                myDB.addParcel(scanContent)
+                intent = Intent(activity, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
 }
