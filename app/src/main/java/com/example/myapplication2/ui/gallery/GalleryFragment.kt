@@ -63,10 +63,18 @@ class GalleryFragment : Fragment() {
                 Toast.makeText(context, "Input field can not be empty", Toast.LENGTH_SHORT).show();
                 return@setOnClickListener
             } else {
-                myDB.addParcel(input.text.toString())
-//                myDB.addParcel("TESTPACKAGEATPICKUPPOINT")
-                intent = Intent(activity, MainActivity::class.java)
-                startActivity(intent)
+                if (input.text.toString() == "TESTPACKAGEATPICKUPPOINT" || input.text.toString() == "TESTPACKAGELOADEDFORDELIVERY" ||
+                    input.text.toString() == "TESTPACKAGEEDI" || input.text.toString() == "TESTPACKAGEDELIVERED" ){
+                    myDB.addParcel(input.text.toString())
+
+                    intent = Intent(activity, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(context, "Only following numbers are allowed in order to function propperly: " +
+                            "TESTPACKAGEATPICKUPPOINT, TESTPACKAGEEDI, TESTPACKAGELOADEDFORDELIVERY, TESTPACKAGEDELIVERED",
+                        Toast.LENGTH_LONG).show();
+                }
+
             }
         }
 
