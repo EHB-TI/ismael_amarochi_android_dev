@@ -64,6 +64,7 @@ class GalleryFragment : Fragment() {
                 return@setOnClickListener
             } else {
                 myDB.addParcel(input.text.toString())
+//                myDB.addParcel("TESTPACKAGEATPICKUPPOINT")
                 intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
             }
