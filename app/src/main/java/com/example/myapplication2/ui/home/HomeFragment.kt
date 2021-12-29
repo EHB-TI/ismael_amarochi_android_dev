@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication2.MyDatabaseHelper
 import com.example.myapplication2.databinding.FragmentHomeBinding
+import kotlin.concurrent.thread
 
 class HomeFragment : Fragment() {
 
@@ -64,7 +65,10 @@ class HomeFragment : Fragment() {
         parcel_status = ArrayList();
         parcel_number = ArrayList();
 
-        storeDataInArrays()
+        thread(start = true) {
+            storeDataInArrays()
+            println("running from thread(): ${Thread.currentThread()}")
+        }
 
         customAdapter = CustomAdapter(this, context, parcel_id, parcel_name, parcel_status, parcel_number)
         recyclerView.adapter = customAdapter

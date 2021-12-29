@@ -65,23 +65,30 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-
         number = apiRequestForNumber(parcelnumber);
         status = apiRequestForStatus(parcelnumber);
         name = apiRequestForName(parcelnumber);
+
 
         cv.put(COLUMN_PARCELNUMBER, number);
         cv.put(COLUMN_STATUS, status);
         cv.put(COLUMN_PARCELNAME, name);
 
-        long result = db.insert(TABLE_NAME, null, cv);
-
-        if (result == -1) {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+        if (name == null || status == null || number == null){
+            Toast.makeText(context, context.getString(R.string.error_occured_insert_db), Toast.LENGTH_SHORT).show();
         }
-        db.close();
+        else {
+            long result = db.insert(TABLE_NAME, null, cv);
+
+            if (result == -1) {
+                Toast.makeText(context, context.getString(R.string.failed_insert_db), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, context.getString(R.string.success_add_db), Toast.LENGTH_SHORT).show();
+            }
+            db.close();
+        }
+
+
     }
 
     public String apiRequestForStatus(String barcode) {
@@ -214,9 +221,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if (result == -1) {
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.update_fail_db), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.success_update_db), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -225,15 +232,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
         if (result == -1) {
-            Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.failed_delete_db), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.success_deleted_db), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void deleteAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.close();
     }
 
 }

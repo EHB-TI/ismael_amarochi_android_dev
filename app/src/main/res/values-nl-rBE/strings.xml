@@ -28,4 +28,11 @@
     <string name="yes_delete_all">NEE</string>
     <string name="sure_delete_item">Bent u zeker dat u volgend item wilt verwijderen:</string>
     <string name="no_data">Geen data</string>
+    <string name="success_deleted_db">Succesvol verwijderd</string>
+    <string name="failed_delete_db">Niet verwijderd</string>
+    <string name="update_fail_db">Niet geupdate</string>
+    <string name="success_update_db">Update succesvol</string>
+    <string name="success_add_db">Succesvol toegevoegd</string>
+    <string name="failed_insert_db">Niet toegevoegd</string>
+    <string name="error_occured_insert_db">Er is een probleem onstaan. Probeer het opnieuw</string>
 </resources>

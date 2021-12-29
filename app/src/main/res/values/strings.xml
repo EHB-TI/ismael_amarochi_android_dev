@@ -32,5 +32,12 @@
     <string name="yes_delete_all">YES</string>
     <string name="sure_delete_item">"Are you sure you want to delete the following item: "</string>
     <string name="no_data">No data</string>
+    <string name="success_deleted_db">Successfully Deleted.</string>
+    <string name="failed_delete_db">Failed to Delete.</string>
+    <string name="update_fail_db">Update failed</string>
+    <string name="success_update_db">Updated Successfully!</string>
+    <string name="success_add_db">Added Successfully!</string>
+    <string name="failed_insert_db">Failed insert</string>
+    <string name="error_occured_insert_db">An error has occurred. Try again</string>
 
 </resources>

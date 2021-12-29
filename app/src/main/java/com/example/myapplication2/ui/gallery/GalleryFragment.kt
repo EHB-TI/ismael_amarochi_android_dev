@@ -83,9 +83,10 @@ class GalleryFragment : Fragment() {
                 if (input.text.toString() == "TESTPACKAGEATPICKUPPOINT" || input.text.toString() == "TESTPACKAGELOADEDFORDELIVERY" ||
                     input.text.toString() == "TESTPACKAGEEDI" || input.text.toString() == "TESTPACKAGEDELIVERED" ){
                     myDB.addParcel(input.text.toString())
-
+                    myDB.close()
                     intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
+
                 } else {
                     Toast.makeText(context, getString(R.string.only_items_are_ok),
                         Toast.LENGTH_LONG).show();
@@ -102,6 +103,7 @@ class GalleryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        myDB.close()
     }
 
     fun scanBarcode(){
@@ -117,11 +119,12 @@ class GalleryFragment : Fragment() {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Toast.makeText(context, getString(R.string.cancelled), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.cancelled), Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, getString(R.string.scanned) + result.contents, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.scanned) + result.contents, Toast.LENGTH_SHORT).show()
                 scanContent = result.contents
                 myDB.addParcel(scanContent)
+                myDB.close()
                 intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
             }
