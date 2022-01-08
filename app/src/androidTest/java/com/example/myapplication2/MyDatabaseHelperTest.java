@@ -2,10 +2,13 @@ package com.example.myapplication2;
 
 import static org.junit.Assert.*;
 
+import android.content.Context;
+
 import org.junit.Test;
 
 public class MyDatabaseHelperTest {
 
+    Context context;
 
 
     @Test
@@ -18,19 +21,19 @@ public class MyDatabaseHelperTest {
 
     @Test
     public void apiRequestForStatus() {
-        MyDatabaseHelper myDatabaseHelper = new MyDatabaseHelper(null);
-        assertEquals("READY_FOR_PICKUP", myDatabaseHelper.apiRequestForStatus("READY_FOR_PICKUP") );
+        MyDatabaseHelper myDatabaseHelper = new MyDatabaseHelper(context);
+        assertEquals("READY_FOR_PICKUP", myDatabaseHelper.apiRequestForStatus("TESTPACKAGEATPICKUPPOINT") );
     }
 
     @Test
     public void apiRequestForName() {
-        MyDatabaseHelper myDatabaseHelper = new MyDatabaseHelper(null);
-        assertEquals("Pick-up parcel", myDatabaseHelper.apiRequestForName("Pick-up parcel") );
+        MyDatabaseHelper myDatabaseHelper = new MyDatabaseHelper(context);
+        assertEquals("Pick-up parcel", myDatabaseHelper.apiRequestForName("TESTPACKAGEATPICKUPPOINT") );
     }
 
     @Test
     public void apiRequestForNumber() {
-        MyDatabaseHelper myDatabaseHelper = new MyDatabaseHelper(null);
+        MyDatabaseHelper myDatabaseHelper = new MyDatabaseHelper(context);
         assertEquals("TESTPACKAGEATPICKUPPOINT", myDatabaseHelper.apiRequestForNumber("TESTPACKAGEATPICKUPPOINT") );
     }
 
